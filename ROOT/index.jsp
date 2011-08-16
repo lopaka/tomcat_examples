@@ -193,9 +193,8 @@
         <td align="left" valign="top">
           <p id="congrats">If you're seeing this page via a web browser, it means you've setup Tomcat successfully. Congratulations!</p>
           <p id="congrats">It also means you obtained this web page from git using RightScale- congrats again!</p>
+<%@ page import="java.io.*" %>
 <%
-  @ page import="java.io.*"
-
   String yourCommand = "/bin/hostname";
   String[] fullCommand = { yourCommand };
   try {
