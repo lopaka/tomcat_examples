@@ -193,6 +193,26 @@
         <td align="left" valign="top">
           <p id="congrats">If you're seeing this page via a web browser, it means you've setup Tomcat successfully. Congratulations!</p>
           <p id="congrats">It also means you obtained this web page from git using RightScale- congrats again!</p>
+<%
+  @ page import="java.io.*"
+
+  String yourCommand = "/bin/hostname";
+  String[] fullCommand = { yourCommand };
+  try {
+    Process p = Runtime.getRuntime().exec(fullCommand);
+    BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+    BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+    //read the output from the command
+    out.println("<p id=\"congrats\">Tomcat App server name: ");
+    String s = null;
+    while ((s = stdInput.readLine()) != null) {
+     out.println(s);
+    }
+    out.println("</p>\n");
+  } catch (IOException ioe) {
+  System.err.println("\n\n\nIOException: " + ioe.toString());
+  }
+%>
  
           <p>As you may have guessed by now, this is the default Tomcat home page. It can be found on the local filesystem at:</p>
           <p class="code">$CATALINA_HOME/webapps/ROOT/index.jsp</p>
